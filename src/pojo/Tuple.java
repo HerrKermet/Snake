@@ -15,9 +15,11 @@ public class Tuple {
         this.y = y;
     }
 
+    // &begin[Update]
     public int getX() {
         return x;
     }
+    // &end[Update]
 
     public int getY() {
         return y;

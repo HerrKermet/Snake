@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import pojo.Tuple;
 import graphics.Window;
 
+import static java.lang.Math.abs;
+
 //Controls all the game logic .. most important class in this project.
 public class ThreadsController extends Thread {
     private final ArrayList<ArrayList<DataOfSquare>> Squares;
@@ -48,6 +50,7 @@ public class ThreadsController extends Thread {
     }
 
     //delay between each move of the snake
+    
     // &begin[GameState]
     private void pause() {
         try {
@@ -90,8 +93,8 @@ public class ThreadsController extends Thread {
         }
     }
     // &end[Collision]
-
     //Put food in a position and displays it
+
     // &begin[Spawn]
     private void spawnFood(Tuple foodPositionIn) {
         Squares.get(foodPositionIn.x).get(foodPositionIn.y).lightMeUp(SquareToLightUp.FOOD);
@@ -99,6 +102,7 @@ public class ThreadsController extends Thread {
     // &end[Spawn]
 
     // &begin[Blank]
+
     //return a position not occupied by the snake
     private Tuple getTileNotInSnake() {
         Tuple p;
@@ -125,28 +129,38 @@ public class ThreadsController extends Thread {
     private void moveInternal(Direction dir) {
         switch (dir) {
             case DOWN:
+                // &begin[CaseDown]
                 headSnakePos.ChangeData(headSnakePos.x, (headSnakePos.y + 1) % 20);
                 positions.add(new Tuple(headSnakePos.x, headSnakePos.y));
+                // &end[CaseDown]
                 break;
             case UP:
+                // &begin[UP_If]
                 if (headSnakePos.y - 1 < 0) {
-                    headSnakePos.ChangeData(headSnakePos.x, 19);
-                } else {
-                    headSnakePos.ChangeData(headSnakePos.x, Math.abs(headSnakePos.y - 1) % 20);
+                    headSnakePos.ChangeData(headSnakePos.x, 19); // &line[ChangeData]
+                    // &end[UP_If]
+                } // &begin[UP_Else]
+                else {
+                    headSnakePos.ChangeData(headSnakePos.x, abs(headSnakePos.y - 1) % 20);
+                    // &end[UP_Else]
                 }
                 positions.add(new Tuple(headSnakePos.x, headSnakePos.y));
                 break;
             case LEFT:
+                // &begin[CaseLeft]
                 if (headSnakePos.x - 1 < 0) {
                     headSnakePos.ChangeData(19, headSnakePos.y);
                 } else {
-                    headSnakePos.ChangeData(Math.abs(headSnakePos.x - 1) % 20, headSnakePos.y);
+                    headSnakePos.ChangeData(abs(headSnakePos.x - 1) % 20, headSnakePos.y);
                 }
+                // &begin[Position]
                 positions.add(new Tuple(headSnakePos.x, headSnakePos.y));
+                // &end[Position]
+                // &end[CaseLeft]
 
                 break;
             case RIGHT:
-                headSnakePos.ChangeData(Math.abs(headSnakePos.x + 1) % 20, headSnakePos.y);
+                headSnakePos.ChangeData(abs(headSnakePos.x + 1) % 20, headSnakePos.y);
                 positions.add(new Tuple(headSnakePos.x, headSnakePos.y));
                 break;
         }

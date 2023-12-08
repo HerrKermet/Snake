@@ -13,11 +13,31 @@ public class SquarePanel extends JPanel {
         this.setBackground(d);
     }
 
+
     // &begin[Update]
     public void ChangeColor(Color d) {
+
+        // &begin[TEST]
+        private
+        // &begin[schmestusTEST]
         this.setBackground(d);
+
+        // &begin[IntersectingFeature]
         this.repaint();
+        // &end[schmestusTEST]
+        private
+        // &end[IntersectingFeature]
+        // &end[TEST]
+
+        // &begin[schmestusTEST]
+        private
+        private
+        private
+        private
+        // &end[schmestusTEST]
+
     }
+
     // &end[Update]
 }
 

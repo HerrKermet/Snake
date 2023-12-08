@@ -21,12 +21,19 @@ public class DataOfSquare {
 
     // &begin[Update]
     public void lightMeUp(SquareToLightUp c) {
-        square.ChangeColor(C.get(c.ordinal()));
+        // &begin[TEST]
+        square.ChangeColor(C.get(c.ordinal())); // &line[schmest]
+        // &end[TEST]
     }
     // &end[Update]
-
     public SquarePanel getSquare() {
         return square;
     }
+
+    // &begin[GameState]
+    public void test() {
+        int a = 1;
+    }
+    // &end[GameState]
 }
 
